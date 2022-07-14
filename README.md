@@ -1,2 +1,2 @@
 # webRepo
-suvlet
+servlet
