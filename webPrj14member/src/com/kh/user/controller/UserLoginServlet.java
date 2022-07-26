@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.kh.common.JDBCTemplate;
 import com.kh.user.dto.UserDto;
 
 @WebServlet(urlPatterns = "/user/login")
@@ -35,13 +36,7 @@ public class UserLoginServlet extends HttpServlet{
 			//커넥션 얻기
 			//드라이버 준비
 			//url, id, pwd
-			String driver="oracle.jdbc.driver.OracleDriver";
-			String url = "jdbc:oracle:thin:@localhost:1521:xe";
-			String dbId = "C##KH";
-			String dbPwd = "KH";
-			Class.forName(driver);
-			
-			Connection conn = DriverManager.getConnection(url,dbId,dbPwd);
+			Connection conn = JDBCTemplate.getConnection();
 			
 			//SQL 준비
 			String sql = "SELECT NO, ID, NICK, ENROLL_DATE FROM MEMBER WHERE ID=? AND PWD=? AND QUIT_YN = 'N'";
