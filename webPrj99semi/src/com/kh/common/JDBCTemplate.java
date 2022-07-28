@@ -28,8 +28,8 @@ public class JDBCTemplate {
 		
 		String driver = prop.getProperty("driver");
 		String url =  prop.getProperty("url");
-		String dbId =  prop.getProperty("id");
-		String dbPwd =  prop.getProperty("pwd");
+		String dbId =  prop.getProperty("dbId");
+		String dbPwd =  prop.getProperty("dbPwd");
 		Class.forName(driver);
 		
 		Connection conn = DriverManager.getConnection(url,dbId,dbPwd);

@@ -8,9 +8,10 @@ public class MemberVo {
 		
 	}
 	
+	
+	
 	public MemberVo(int no, String id, String pwd, String name, String phone, String email, String addr,
 			String interest, Timestamp enrollDate, Timestamp modifyDate, String status) {
-		super();
 		this.no = no;
 		this.id = id;
 		this.pwd = pwd;
@@ -24,9 +25,24 @@ public class MemberVo {
 		this.status = status;
 	}
 	 
-	private int no;
+	//회원가입시 사용하는 생성자
+	public MemberVo(String memberId, String memberPwd, String memberPwd2, String memberName, String memberPhone, String memberEmail,
+			String memberAddr, String memberInterest) {
+		
+		this.id = memberId;
+		this.pwd = memberPwd;
+		this.pwd2 = memberPwd2;
+		this.name = memberName;
+		this.phone = memberPhone;
+		this.email = memberEmail;
+		this.addr = memberAddr;
+		this.interest = memberInterest;
+	}
+
+	 private int no;
      private String id;
      private String pwd;
+     private String pwd2;
      private String name;
      private String phone;
      private String email;
@@ -38,6 +54,19 @@ public class MemberVo {
 	public int getNo() {
 		return no;
 	}
+	
+	
+	
+	
+	
+	public String getPwd2() {
+		return pwd2;
+	}
+
+	public void setPwd2(String pwd2) {
+		this.pwd2 = pwd2;
+	}
+
 	public void setNo(int no) {
 		this.no = no;
 	}
