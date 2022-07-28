@@ -20,6 +20,7 @@ public class UserJoinServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		Connection conn = null;
 		try {
 			//회원가입
 			
@@ -38,7 +39,7 @@ public class UserJoinServlet extends HttpServlet{
 			//디비에 insert
 			
 			//커넥션 준비 (드라이버, url, id, pwd)
-			Connection conn = JDBCTemplate.getConnection();
+			conn = JDBCTemplate.getConnection();
 			
 			//SQL 준비
 			String sql = "INSERT INTO MEMBER(NO, ID, PWD, NICK) VALUES(SEQ_MEMBER_NO.NEXTVAL, ?,?,?)";
@@ -58,6 +59,7 @@ public class UserJoinServlet extends HttpServlet{
 			if(result == 1) {
 				//회원가입 성공
 				//로그인 페이지로 넘기기
+				JDBCTemplate.commit(conn);
 				HttpSession session = req.getSession();
 				session.setAttribute("joinSuccess", "회원가입 성공 !");
 				resp.sendRedirect("/webPrj14/views/user/login.jsp");
@@ -70,6 +72,7 @@ public class UserJoinServlet extends HttpServlet{
 			
 			//insert 성공 여부에 따라 페이지 이동시키기
 		}catch(Exception e) {
+			JDBCTemplate.commit(conn);
 			System.out.println("회원가입 예외 발생 !!!");
 			e.printStackTrace();
 			HttpSession session = req.getSession();
