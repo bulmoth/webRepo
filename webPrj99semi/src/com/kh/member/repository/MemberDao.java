@@ -3,6 +3,7 @@ package com.kh.member.repository;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 
 import com.kh.common.JDBCTemplate;
@@ -106,6 +107,39 @@ public class MemberDao {
 		//만들어진 객체 리턴
 		return loginMember;
 		
+	}//login
+	
+	
+	/*
+	 * 회원 정보 수정
+	 */
+	public int edit(Connection conn, MemberVo vo) throws Exception {
+		//Connection 준비
+		
+		//SQL 준비
+		String sql = "UPDATE MEMBER SET NAME = ? , EMAIL = ? , PHONE = ? , ADDR = ? , INTEREST = ? , MODIFY_DATE = SYSDATE WHERE NO = ?";
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		try {
+			//SQL 객체에 담고, 완성하기
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getName());
+			pstmt.setString(2, vo.getEmail());
+			pstmt.setString(3, vo.getPhone());
+			pstmt.setString(4, vo.getAddr());
+			pstmt.setString(5, vo.getInterest());
+			pstmt.setInt(6, vo.getNo());
+			
+			//SQL 실행 및 결과 저장
+			result = pstmt.executeUpdate();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		 //SQL 실행결과 리턴
+		return result;
 	}
 
 }//class

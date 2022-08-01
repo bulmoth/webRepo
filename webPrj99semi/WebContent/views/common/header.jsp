@@ -3,6 +3,11 @@
     pageEncoding="UTF-8"%>
 <%
 	MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+
+	String alertMsg = (String)session.getAttribute("alertMsg");
+	session.removeAttribute("alertMsg");
+	
+	String contextPath = request.getContextPath();
 %>
     
 <!DOCTYPE html>
@@ -41,6 +46,8 @@
             box-sizing: border-box;
         }
     </style>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
     
@@ -49,7 +56,7 @@
 
         <div id="login-wrap">
         	<%if(loginMember == null){%>
-        	<form action="/semi/member/login" method="post">
+        	<form action="<%=contextPath%>/member/login" method="post">
         		<table>
                 <tr>
                     <td>아이디</td>
@@ -62,27 +69,33 @@
                 <tr>
                     <td></td>
                     <td><button>로그인</button></td>
-                    <td><button type="button" onclick="location.href='/semi/member/join'">회원가입</button></td>
+                    <td><button type="button" onclick="location.href='<%=contextPath%>/member/join'">회원가입</button></td>
                 </tr>
             </table>
         	</form>
             <%}else{%>
             	<%=loginMember.getName() %>님 환영합니다.
             	<br>
-            	<a href="">마이페이지</a>
-            	<a href="">로그아웃</a>
+            	<a href="/semi/member/myPage">마이페이지</a>
+            	<a href="<%=contextPath%>/member/logout">로그아웃</a>
             <%} %>
         </div>
 
     </header>
 
         <nav>
-            <a href="/semi">HOME</a>
+            <a href="<%=contextPath%>">HOME</a>
             <a href="">공지사항</a>
             <a href="">일반게시판</a>
             <a href="">사진게시판</a>
         </nav>
     
+    
+    <script>
+    	<%if(alertMsg!=null){%>
+    		alert('<%=alertMsg%>');
+    	<%}%>
+    </script>
 
 </body>
 </html>

@@ -2,7 +2,7 @@ package com.kh.member.service;
 
 import java.sql.Connection;
 
-import com.kh.common.JDBCTemplate;
+import static com.kh.common.JDBCTemplate.*;
 import com.kh.member.repository.MemberDao;
 import com.kh.member.vo.MemberVo;
 
@@ -38,21 +38,21 @@ public class MemberService {
 		Connection conn = null;
 		int result = 0;
 		try {
-			conn = JDBCTemplate.getConnection();
+			conn = getConnection();
 			
 			result = new MemberDao().join(vo, conn);
 			
 			if(result == 1) {
-				JDBCTemplate.commit(conn);
+				commit(conn);
 			}else {
-				JDBCTemplate.rollback(conn);
+				rollback(conn);
 			}
 			
 		} catch (Exception e) {
-			JDBCTemplate.rollback(conn);
+			rollback(conn);
 			e.printStackTrace();
 		}finally {
-			JDBCTemplate.close(conn);
+			close(conn);
 		}
 		
 		return result;
@@ -69,7 +69,7 @@ public class MemberService {
 		Connection conn = null;
 		MemberVo loginMember = null;
 		try {
-			conn = JDBCTemplate.getConnection();
+			conn = getConnection();
 			
 			//SQL 실행결과 리턴
 			loginMember = new MemberDao().login(conn, vo);
@@ -83,5 +83,40 @@ public class MemberService {
 		return loginMember;
 		
 	}
+	
+	/*
+	 * 회원 정보 수정
+	 */
+	public int edit(MemberVo vo) {
+		 //비즈니스 로직 실행(자바||SQL)
+		if(vo.getName().length() > 3) {
+			//문제 발생, 다음 단계 진행 X
+			return -1;
+		}
+		
+		Connection conn = null;
+		int result = 0;
+		
+		try {
+			conn = getConnection();
+			result = new MemberDao().edit(conn, vo);
+			
+			 //트랜젝션 처리 (commit||rollback)
+			if(result == 1) {
+				commit(conn);
+			}else {
+				rollback(conn);
+			}
+		}catch(Exception e){
+			rollback(conn);
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+		
+		
+		 //실행결과 리턴
+		return result;
+	}//edit
 
 }//class

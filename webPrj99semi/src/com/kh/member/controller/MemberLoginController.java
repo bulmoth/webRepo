@@ -34,11 +34,13 @@ public class MemberLoginController extends HttpServlet{
 		if(loginMember != null) {
 			//로그인 성공 //세션에 로그인 유저 정보 담기
 			req.getSession().setAttribute("loginMember", loginMember);
+			req.getSession().setAttribute("alertMsg", "로그인 성공!");
 //			req.getRequestDispatcher("/semi").forward(req, resp);
 			resp.sendRedirect("/semi");
 		}else {
 			//로그인 실패
-			req.getRequestDispatcher("다음타자(실패화면)").forward(req, resp);
+			req.setAttribute("errorMsg", "로그인 실패!");
+			req.getRequestDispatcher("/views/error/errorPage.jsp").forward(req, resp);
 		}
 		
 	}//method
