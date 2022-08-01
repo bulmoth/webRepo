@@ -49,7 +49,8 @@
 
         <div id="login-wrap">
         	<%if(loginMember == null){%>
-            <table>
+        	<form action="/semi/member/login" method="post">
+        		<table>
                 <tr>
                     <td>아이디</td>
                     <td colspan="2"><input type="text" name="memberId"></td>
@@ -61,11 +62,12 @@
                 <tr>
                     <td></td>
                     <td><button>로그인</button></td>
-                    <td><button onclick="location.href='/semi/member/join'">회원가입</button></td>
+                    <td><button type="button" onclick="location.href='/semi/member/join'">회원가입</button></td>
                 </tr>
             </table>
+        	</form>
             <%}else{%>
-            	ㅇㅇㅇ님 환영합니다.
+            	<%=loginMember.getName() %>님 환영합니다.
             	<br>
             	<a href="">마이페이지</a>
             	<a href="">로그아웃</a>

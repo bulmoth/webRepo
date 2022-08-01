@@ -58,5 +58,30 @@ public class MemberService {
 		return result;
 		
 	}//join
+	
+	
+	/*
+	 * 로그인
+	 */
+	public MemberVo login(MemberVo vo) {
+		
+		//SQL 시행을 위해서 Connection 준비
+		Connection conn = null;
+		MemberVo loginMember = null;
+		try {
+			conn = JDBCTemplate.getConnection();
+			
+			//SQL 실행결과 리턴
+			loginMember = new MemberDao().login(conn, vo);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		return loginMember;
+		
+	}
 
 }//class
