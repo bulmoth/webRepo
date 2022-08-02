@@ -16,6 +16,14 @@
 		background-color: black;
 		color: white;
 	}
+	#pwdFormOuter{
+		display:flex;
+		justify-content:center;
+	}
+	#pwdFormOuter td:last-child{
+		display:flex;
+		justify-content: right;
+	}
 </style>
 </head>
 <body>
@@ -66,16 +74,13 @@
 					</td>
 				</tr>
 				<tr>
-					<td><input type="submit" id="" value="정보변경"></td>
+					<td><input type="submit" id="" value="정보변경" class="btn btn-primary"></td>
 					<td>
-						<input id="joinBtn" type="button" value="비밀번호변경">
-						<input id="joinBtn" type="button" value="회원탈퇴">
+						<input id="joinBtn" class="btn btn-warning" type="button" value="비밀번호변경" data-bs-toggle="modal" data-bs-target="#pwdChange">
+						<input id="joinBtn" class="btn btn-danger" type="button" value="회원탈퇴" onclick="location.href='/semi/member/quit'">
 					</td>
 				</tr>
 			</table>
-
-
-
 
 
 			<script>
@@ -91,16 +96,54 @@
 							this.checked=true;
 						}
 					});
-					
+						
 				});
-				
-				
-			
-			
-			
-			</script>
+		
+				</script>
 		</form>
 	</main>
+	
+	<!-- The Modal -->
+	<div class="modal" id="pwdChange">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	
+	      <!-- Modal Header -->
+	      <div class="modal-header">
+	        <h4 class="modal-title">Modal Heading</h4>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+	      </div>
+	
+	      <!-- Modal body -->
+	      <div class="modal-body">
+	      	<div id="pwdFormOuter">
+	      		<form action="<%=contextPath %>/member/pwd" method="post">
+	      		<input type="hidden" name="memberId" value="<%=loginMember.getId()%>">
+		      		<table>
+		      			<tr>
+		      				<td>기존 비밀번호</td>
+		      				<td><input type="password" name="memberPwd"></td>
+		      			</tr>
+		      			<tr>
+		      				<td>신규 비밀번호</td>
+		      				<td><input type="password" name="memberPwdNew"></td>
+		      			</tr>
+		      			<tr>
+		      				<td>신규 비밀번호 확인</td>
+		      				<td><input type="password" name="memberPwdNew2"></td>
+		      			</tr>
+		      			<tr>
+		      				<td colspan="2">
+		      					<input type="submit" value="변경하기">
+		      				</td>
+		      			</tr>
+		      		</table>
+		      	</form>
+	      	</div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 	
 
 </body>

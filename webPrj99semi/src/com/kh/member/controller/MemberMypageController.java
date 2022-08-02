@@ -53,6 +53,8 @@ public class MemberMypageController extends HttpServlet{
 	 */
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
+		
 		//데이터 받기 -> 객체
 		String name = req.getParameter("memberName");
 		String email = req.getParameter("memberEmail");
@@ -70,15 +72,17 @@ public class MemberMypageController extends HttpServlet{
 		vo.setInterest(String.join(",", interest));
 		
 		//서비스 호출(객체)
-		int result = new MemberService().edit(vo);
+		MemberVo updateVo = new MemberService().edit(vo);
 		
 		//실행결과에 따라 화면 선택
-		if(result == 1) {
+		if(updateVo != null) {
 			//성공화면
-			System.out.println("정보수정 성공");
+			req.getSession().setAttribute("loginMember", updateVo);
+			resp.sendRedirect("/semi/member/myPage");
 		}else {
 			//실패화면
-			System.out.println("정보수정 실패");
+			req.setAttribute("errorMsg", "회원 정보 수정 실패!");
+			req.getRequestDispatcher("/views/error/errorPage.jsp").forward(req, resp);
 		}
 		
 	}
