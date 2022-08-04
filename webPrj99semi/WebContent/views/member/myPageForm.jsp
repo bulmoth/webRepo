@@ -77,7 +77,7 @@
 					<td><input type="submit" id="" value="정보변경" class="btn btn-primary"></td>
 					<td>
 						<input id="joinBtn" class="btn btn-warning" type="button" value="비밀번호변경" data-bs-toggle="modal" data-bs-target="#pwdChange">
-						<input id="joinBtn" class="btn btn-danger" type="button" value="회원탈퇴" onclick="location.href='/semi/member/quit'">
+						<input id="quitBtn" class="btn btn-danger" type="button" value="회원탈퇴">
 					</td>
 				</tr>
 			</table>
@@ -94,6 +94,13 @@
 						var result = interest.indexOf(this.value);
 						if(result != -1){
 							this.checked=true;
+						}
+					});
+					
+					//회원탈퇴 물어보기
+					$('#quitBtn').click(function(){
+						if(confirm('탈퇴하시겠습니까?')){
+							location.href='<%=contextPath%>/member/quit';
 						}
 					});
 						
@@ -134,7 +141,7 @@
 		      			</tr>
 		      			<tr>
 		      				<td colspan="2">
-		      					<input type="submit" value="변경하기">
+		      					<input type="submit" value="변경하기" onclick="return checkPwd();">
 		      				</td>
 		      			</tr>
 		      		</table>
@@ -145,6 +152,21 @@
 	  </div>
 	</div>
 	
+	
+	
+		
+	<script>
+		function checkPwd(){
+			isSame = $('input[name=memberPwdNew]').val() == $('input[name=memberPwdNew2]').val();
+			if(isSame){
+				return true;
+			}else{
+				alert("신규 비밀번호가 일치하지 않습니다.");
+				return false;
+			}
+		}
+		
+	</script>
 
 </body>
 </html>

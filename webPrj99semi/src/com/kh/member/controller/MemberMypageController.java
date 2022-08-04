@@ -61,6 +61,10 @@ public class MemberMypageController extends HttpServlet{
 		String phone = req.getParameter("memberPhone");
 		String addr = req.getParameter("memberAddr");
 		String[] interest = req.getParameterValues("interest");
+		if(interest == null) {
+			interest = new String[]{""};
+		}
+		
 		int no = ((MemberVo)req.getSession().getAttribute("loginMember")).getNo();
 		
 		MemberVo vo = new MemberVo();
@@ -78,6 +82,7 @@ public class MemberMypageController extends HttpServlet{
 		if(updateVo != null) {
 			//성공화면
 			req.getSession().setAttribute("loginMember", updateVo);
+			req.getSession().setAttribute("alertMsg", "회원 정보 수정 완료!");
 			resp.sendRedirect("/semi/member/myPage");
 		}else {
 			//실패화면

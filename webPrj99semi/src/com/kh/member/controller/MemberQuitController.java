@@ -24,10 +24,12 @@ public class MemberQuitController extends HttpServlet{
 		if(result == 1) {
 			System.out.println("회원 탈퇴 성공");
 			req.getSession().invalidate();
+			req.getSession().setAttribute("alertMsg", "회원 탈퇴 성공");
 			resp.sendRedirect(req.getContextPath());
 		}else {
 			System.out.println("회원 탈퇴 실패");
 			resp.sendRedirect(req.getContextPath());
+			req.getSession().setAttribute("alertMsg", "회원 탈퇴 실패");
 		}
 		
 	}

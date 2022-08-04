@@ -82,7 +82,7 @@
             <%}else{%>
             	<%=loginMember.getName() %>님 환영합니다.
             	<br>
-            	<a href="/semi/member/myPage">마이페이지</a>
+            	<a href="<%=contextPath%>/member/myPage">마이페이지</a>
             	<a href="<%=contextPath%>/member/logout">로그아웃</a>
             <%} %>
         </div>
@@ -91,7 +91,7 @@
 
         <nav>
             <a href="<%=contextPath%>">HOME</a>
-            <a href="">공지사항</a>
+            <a href="<%=contextPath%>/notice/list">공지사항</a>
             <a href="">일반게시판</a>
             <a href="">사진게시판</a>
         </nav>
