@@ -1,5 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%
+
+	String alertMsg = (String)session.getAttribute("alertMsg");
+	session.removeAttribute("alertMsg");
+	
+	String contextPath = request.getContextPath();
+
+%>
+    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +32,7 @@
             font-style: normal;
         }
         body{
-            background-color: rgba(248, 237, 222, 1);
+            background-color: ivory;
             font-family: 'twayair';
         }
         div{
@@ -112,7 +123,7 @@
     <div id="wrap-div">
         <header>
             <div id="img-div">
-                <button class="btn" onclick="location.href='#'">
+                <button class="btn" onclick="location.href='<%=contextPath%>'">
                     <img src="200perlogo_.png" alt="200% logo" id="logo">
                 </button>
             </div>
@@ -177,16 +188,24 @@
 
 
     <script>
-        $(".nav-link").mouseleave(function(){
-            $(this).css("color","black");
-        }).mouseenter(function(){
-            $(this).css("color","darkgreen");
-        });
-        $(".dropdown-item").mousedown(function(){
-            $(this).css("background-color","darkgreen");
-        }).mouseup(function(){
-            $(this).css("background-color","white");
-        });
+	    $(function(){
+	        $(".nav-link").mouseleave(function(){
+	            $(this).css("color","black");
+	        }).mouseenter(function(){
+	            $(this).css("color","darkgreen");
+	        });
+	        $(".dropdown-item").mousedown(function(){
+	            $(this).css("background-color","darkgreen");
+	        }).mouseup(function(){
+	            $(this).css("background-color","white");
+	        });
+	        
+	        
+	        <%if(alertMsg!=null){%>
+    			alert('<%=alertMsg%>');
+    		<%}%>
+	        
+	    });
     </script>
 </body>
 </html>
