@@ -32,7 +32,7 @@
             font-style: normal;
         }
         body{
-            background-color: ivory;
+            background-color: #F9F5EA;
             font-family: 'twayair';
         }
         div{
@@ -86,6 +86,7 @@
             font-size: 20px;
             font-weight: 900;
             padding: 10px 30px;
+
         }
         .dropdown-menu{
             background-color: white;
