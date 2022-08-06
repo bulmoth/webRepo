@@ -29,7 +29,8 @@
         background-color: gray;
         height: 100%;
         margin: auto;
-        font-size: 23px;
+        margin-left: 192px;
+        font-size: 30px;
     }
 </style>
 </head>
@@ -44,6 +45,37 @@
     <div id="category-body">
         <div id="category-name">
             푸드<%=categoryName%>
+        </div>
+        <div id="category-content-wrap">
+            <div class="prj-wrap">
+                <div class="prj-img">
+                    <img src="" alt="프로젝트 메인 사진">
+                </div>
+                <div class="prj-category">
+                    프로젝트 카테고리 | 프로젝트 메이커
+                </div>
+                <div class="prj-title">
+                    프로젝트 타이틀
+                </div>
+                <div class="prj-subscribe">
+                    프로젝트 설명
+                </div>
+                <div class="gage-div">
+                    <div class="percentage">
+                        달성률
+                    </div>
+                    <div class="amount">
+                        모인 금액
+                    </div>
+                    <div class="d-day">
+                        남은 날짜
+                    </div>
+                    <div class="gage-bar progress" style="height: 5px;">
+                        <div class="progress-bar" style="width: 50%; height: 5px;"></div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
 
