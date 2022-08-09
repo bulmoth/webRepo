@@ -60,4 +60,86 @@ public class NoticeService {
 		return result;
 	}
 
-}
+	/*
+	 * 공지사항 조회수 증가
+	 */
+	public int increaseNotice(String num) {
+		
+		Connection conn = null;
+		int result = 0;
+		
+		try {
+			conn = getConnection();
+			
+			//DAO 호출
+			result = new NoticeDao().increaseNotice(conn, num);
+			
+			if(result == 1) {
+				commit(conn);
+			}else {
+				rollback(conn);
+			}
+			
+		} catch (Exception e) {
+			rollback(conn);
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+		
+		
+		return result;
+	}
+
+	/*
+	 * 공지사항 조회
+	 */
+	public NoticeVo selectOne(String num) {
+		
+		Connection conn = null;
+		NoticeVo vo = null;
+		
+		try {
+			conn = getConnection();
+			//DAO 호출
+			vo = new NoticeDao().selectOne(conn, num);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+		
+		return vo;
+	}
+
+	/*
+	 * 공지사항 삭제
+	 */
+	public int delete(String num) {
+		
+		Connection conn = null;
+		int result = 0;
+		
+		try {
+			
+			conn = getConnection();
+			//DAO 호출
+			result = new NoticeDao().delete(conn,num);
+			
+			if(result==1) {
+				commit(conn);
+			}else {
+				rollback(conn);
+			}
+			
+		}catch(Exception e) {
+			rollback(conn);
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+		
+		return result;
+	}
+
+}//class

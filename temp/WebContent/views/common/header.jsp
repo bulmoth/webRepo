@@ -124,7 +124,7 @@
                         <ul class="dropdown-menu">
                             <table>
                                 <tr>
-                                    <td><a class="dropdown-item" href="<%=contextPath%>/views/category/categoryMain.jsp">푸드</a></td>
+                                    <td><a class="dropdown-item" href="#">푸드</a></td>
                                     <td><a class="dropdown-item" href="#">홈, 리빙</a></td>
                                     <td><a class="dropdown-item" href="#">테크, 가전</a></td>
                                     <td><a class="dropdown-item" href="#">도서, 출판</a></td>

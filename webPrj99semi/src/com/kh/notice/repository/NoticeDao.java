@@ -86,4 +86,104 @@ public class NoticeDao {
 		return result;
 	}
 
-}
+	/*
+	 * 공지사항 조회수 증가
+	 */
+	public int increaseNotice(Connection conn, String num) {
+		//conn 준비
+		
+		//SQL 준비
+		String sql = "UPDATE NOTICE SET CNT = CNT+1 WHERE NO = ? AND STATUS = 'N'";
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		try {
+			//SQL 을 객체에 담기 및 물음표 채우기
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, num);
+			
+			//SQL 실행 및 결과 저장
+			result = pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		
+		
+		//결과 반환
+		return result;
+		
+	}
+
+	/*
+	 * 공지사항 조회
+	 */
+	public NoticeVo selectOne(Connection conn, String num) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		NoticeVo vo = null;
+		
+		String sql = "SELECT N.NO ,N.TITLE ,N.CONTENT ,M.NAME AS WRITER ,N.CNT ,N.ENROLL_DATE ,N.STATUS FROM NOTICE N JOIN MEMBER M ON N.WRITER = M.NO WHERE N.STATUS = 'N' AND N.NO = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, num);
+			
+			rs = pstmt.executeQuery();
+			//rs -> obj
+			if(rs.next()){
+				String no = rs.getString("NO");
+				String title = rs.getString("TITLE");
+				String content = rs.getString("CONTENT");
+				String writer = rs.getString("WRITER");
+				String cnt = rs.getString("CNT");
+				String enrollDate = rs.getString("ENROLL_DATE");
+				String status = rs.getString("STATUS");
+				
+				vo = new NoticeVo();
+				vo.setNo(no);
+				vo.setTitle(title);
+				vo.setContent(content);
+				vo.setWriter(writer);
+				vo.setCnt(cnt);
+				vo.setEnrollDate(enrollDate);
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return vo;
+	}
+
+	/*
+	 * 공지사항 삭제
+	 */
+	public int delete(Connection conn, String num) {
+		
+		String sql = "UPDATE NOTICE SET STATUS = 'Y' WHERE NO = ?";
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, num);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+}//class
