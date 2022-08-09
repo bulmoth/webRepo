@@ -1,0 +1,12 @@
+$(function(){
+    $(".nav-link").mouseleave(function(){
+        $(this).css("color","black");
+    }).mouseenter(function(){
+        $(this).css("color","#48CA7D");
+    });
+    $(".dropdown-item").mousedown(function(){
+        $(this).css("background-color","#48CA7D");
+    }).mouseup(function(){
+        $(this).css("background-color","white");
+    });
+});

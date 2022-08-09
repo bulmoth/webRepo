@@ -28,10 +28,10 @@
         padding-left: 192px;
         padding-right: 192px;
     }
-    #category-name{
+    #search-voca{
         height: 100%;
         margin: auto;
-        font-size: 30px;
+        font-size: 20px;
         font-weight: 900;
     }
     #category-sort{
@@ -100,8 +100,8 @@
 
 
     <div id="category-body">
-        <div id="category-name">
-            푸드<%=categoryName%>
+        <div id="search-voca">
+            00의 검색결과
         </div>
         <div id="category-sort" class="dropdown">
             <button type="button" id="sort-btn" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown">

@@ -24,26 +24,15 @@
 
 <meta charset="UTF-8">
 <title>header</title>
+<link rel="stylesheet" href="<%=contextPath %>/resources/css/common.css">
 <style>
-        @font-face {
-            font-family: 'twayair';
-            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_tway@1.0/twayair.woff') format('woff');
-            font-weight: normal;
-            font-style: normal;
-        }
-        body{
-            background-color: #F9F5EA;
-            font-family: 'twayair';
-        }
-        div{
-            box-sizing: border-box;
-        }
         #wrap-div{
             /* border: 1px solid black; */
             position: fixed;
             height: 120px;
             width: 1920px;
             background-color: white;
+            z-index: 999;
         }
         header{
             width: 100%;
@@ -80,13 +69,12 @@
             color: black;
         }
         .nav-link:hover{
-            color: darkgreen;
+            color: #48CA7D;
         }
         .dropdown-item{
             font-size: 20px;
             font-weight: 900;
             padding: 10px 30px;
-
         }
         .dropdown-menu{
             background-color: white;
@@ -107,7 +95,8 @@
         #btn-div button{
             margin-top: 10px;
             border-radius: 100px;
-            background-color: darkgreen;
+            background-color: #48CA7D;
+            border: 0px
         }
         #serch-btn{
             margin-right : 10px;
@@ -125,7 +114,7 @@
         <header>
             <div id="img-div">
                 <button class="btn" onclick="location.href='<%=contextPath%>'">
-                    <img src="200perlogo_.png" alt="200% logo" id="logo">
+                    <img src="<%=contextPath %>/resources/img/200perlogo_.png" alt="200% logo" id="logo">
                 </button>
             </div>
             <div id="category-div" class="navbar navbar-light">
@@ -177,7 +166,7 @@
                 <form action="" method="get">
                     <div id="search-div" class="input-group">
                         <button id="search-btn" class="btn" type="submit">
-                            <img src="search_icon.png" alt="검색아이콘" id="search-icon">
+                            <img src="<%=contextPath %>/resources/img/search_icon.png" alt="검색아이콘" id="search-icon">
                         </button>
                         <input class="form-control" type="text" name="searching" placeholder="검색어를 입력하세요">
                     </div>
@@ -189,24 +178,13 @@
 
 
     <script>
-	    $(function(){
-	        $(".nav-link").mouseleave(function(){
-	            $(this).css("color","black");
-	        }).mouseenter(function(){
-	            $(this).css("color","darkgreen");
-	        });
-	        $(".dropdown-item").mousedown(function(){
-	            $(this).css("background-color","darkgreen");
-	        }).mouseup(function(){
-	            $(this).css("background-color","white");
-	        });
-	        
-	        
+	    $(function(){ 
 	        <%if(alertMsg!=null){%>
     			alert('<%=alertMsg%>');
     		<%}%>
 	        
 	    });
     </script>
+    <script src="<%=contextPath %>/resources/js/nav_color.js"></script>
 </body>
 </html>

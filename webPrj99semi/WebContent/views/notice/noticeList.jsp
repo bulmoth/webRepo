@@ -76,7 +76,19 @@
 		</table>
 	</div>
 
-	
+	<script>
+		$(function(){
+			$("#table-main>tbody>tr").click(function(){
+				//행 클릭 되었을 때, 동작할 내용
+				
+				//글 번호 가져오기
+				const num = $(this).children().eq(0).text();
+				//해당 번호 이용해서 요청 보내기
+				location.href="/semi/notice/detail?num=" + num;
+				
+			});
+		});
+	</script>
 
 </body>
 </html>
