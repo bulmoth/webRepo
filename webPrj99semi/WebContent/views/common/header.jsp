@@ -92,7 +92,7 @@
         <nav>
             <a href="<%=contextPath%>">HOME</a>
             <a href="<%=contextPath%>/notice/list">공지사항</a>
-            <a href="">일반게시판</a>
+            <a href="<%=contextPath%>/board/list?p=1">일반게시판</a>
             <a href="">사진게시판</a>
         </nav>
     

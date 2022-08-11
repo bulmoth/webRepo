@@ -186,4 +186,38 @@ public class NoticeDao {
 		return result;
 	}
 
+	/*
+	 * 공지사항 수정하기
+	 */
+	public int edit(Connection conn, NoticeVo vo) {
+		//conn 객체
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		try {
+			//SQL 준비
+			String sql = "UPDATE NOTICE SET TITLE = ? ,CONTENT = ? WHERE NO = ? ";
+			
+			//SQL을 객체에 담기 && SQL 완성
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getTitle());
+			pstmt.setString(2, vo.getContent());
+			pstmt.setString(3, vo.getNo());
+			
+			//SQL 실행 및 결과 저장
+			result = pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		
+		
+		//실행결과 리턴
+		return result;
+		
+	}
+
 }//class

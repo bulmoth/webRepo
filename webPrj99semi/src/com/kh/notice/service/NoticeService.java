@@ -8,6 +8,8 @@ import com.kh.notice.repository.NoticeDao;
 import com.kh.notice.vo.NoticeVo;
 
 public class NoticeService {
+	
+	private final NoticeDao dao = new NoticeDao();
 
 	public ArrayList<NoticeVo> selectList() {
 		
@@ -140,6 +142,44 @@ public class NoticeService {
 		}
 		
 		return result;
+	}
+
+	/*
+	 * 공지사항 수정하기
+	 */
+	public int edit(NoticeVo vo) {
+		
+		//데이터 검사
+		if(vo.getTitle().length()<1) {
+			return -1;
+		}
+		if(vo.getContent().length()<1) {
+			return -2;
+		}
+		
+		Connection conn = null;
+		int result = 0;
+		
+		conn = getConnection();
+		
+		try {
+			//dao 호출
+			result = dao.edit(conn, vo);
+			
+			if(result == 1) {
+				commit(conn);
+			}else {
+				rollback(conn);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+			rollback(conn);
+		}finally {
+			close(conn);
+		}
+		
+		return result;
+		
 	}
 
 }//class
