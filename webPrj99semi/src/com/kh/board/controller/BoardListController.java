@@ -1,6 +1,7 @@
 package com.kh.board.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.board.service.BoardService;
+import com.kh.board.vo.BoardVo;
+import com.kh.common.PageVo;
 
 @WebServlet(urlPatterns = "/board/list")
 public class BoardListController extends HttpServlet{
@@ -103,6 +106,22 @@ public class BoardListController extends HttpServlet{
 		if(endPage > maxPage) {
 			endPage = maxPage;
 		}
+		
+		PageVo pageVo = new PageVo();
+		pageVo.setBoardLimit(boardLimit);
+		pageVo.setCurrentPage(currentPage);
+		pageVo.setEndPage(endPage);
+		pageVo.setListCount(listCount);
+		pageVo.setMaxPage(maxPage);
+		pageVo.setPageLimit(pageLimit);
+		pageVo.setStartPage(startPage);
+		
+		//게시글 관련 데이터 준비2
+		List<BoardVo> boardVoList = new BoardService().selectList(pageVo);
+		
+		//준비한 데이터 담기
+		req.setAttribute("pv", pageVo);
+		req.setAttribute("list", boardVoList);
 		
 		//화면 보여주기
 		req.getRequestDispatcher("/views/board/boardList.jsp").forward(req, resp);

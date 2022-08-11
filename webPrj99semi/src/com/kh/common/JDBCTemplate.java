@@ -47,7 +47,7 @@ public class JDBCTemplate {
 	//커밋, 롤백
 	public static void commit(Connection conn) {
 		try {
-			if(conn != null) conn.commit();
+			if(conn != null && !conn.isClosed()) conn.commit();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -55,7 +55,7 @@ public class JDBCTemplate {
 	
 	public static void rollback(Connection conn) {
 		try {
-			if(conn != null) conn.rollback();
+			if(conn != null && !conn.isClosed()) conn.rollback();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -64,7 +64,7 @@ public class JDBCTemplate {
 	//close
 	public static void close(Statement stmt) {
 		try {
-			if(stmt != null) stmt.close();
+			if(stmt != null && !stmt.isClosed()) stmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -72,7 +72,7 @@ public class JDBCTemplate {
 	
 	public static void close(ResultSet rs) {
 		try {
-			if(rs != null) rs.close();
+			if(rs != null && !rs.isClosed()) rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -80,7 +80,7 @@ public class JDBCTemplate {
 	
 	public static void close(Connection conn) {
 		try {
-			if(conn != null) conn.close();
+			if(conn != null && !conn.isClosed()) conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
