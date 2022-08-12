@@ -210,7 +210,7 @@
                     <table>
                         <tr>
                             <td id="name">김과일</td>
-                            <td><div id="default" class="btn btn-sm btn-danger disabled">기본</div></td>
+                            <td><div id="default" class="btn btn-sm btn-danger disabled opacity-0">기본</div></td>
                             <td rowspan="3" class="btn-td"><button class="btn btn-success">변경</button></td>
                         </tr>
                         <tr>
@@ -247,7 +247,7 @@
                         </tr>
                         <tr>
                             <td id="card-name">사과카드</td>
-                            <td><div class="btn btn-sm btn-danger disabled">기본</div></td>
+                            <td><div class="btn btn-sm btn-danger disabled opacity-0">기본</div></td>
                             <td id="card-num">************1234</td>
                         </tr>
                     </table>
