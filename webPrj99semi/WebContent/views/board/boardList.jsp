@@ -3,6 +3,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <%
 	List<BoardVo> voList = (List<BoardVo>)request.getAttribute("list");
 	PageVo pv = (PageVo)request.getAttribute("pv");
@@ -47,10 +48,10 @@
 	<div id="outer">
 
 		<h1 align="center">게시글 조회</h1>
-		<div style="text-align: right; width:95%;">
-			<%if(loginMember != null){%>
-				<a class="btn btn-primary" href="<%=contextPath%>/board/insert">글쓰기</a>
-			<%}%>
+		<div style="text-align: right; width:95%;">			
+			<c:if test="${not empty loginMember}">
+				<a class="btn btn-primary" href="${cp}/board/insert">글쓰기</a>
+			</c:if>
 		</div>
 		
 		<table border="1">
@@ -63,16 +64,17 @@
 				<th>조회수</th>
 				<th>작성일시</th>
 			</tr>
-			<% for(BoardVo b : voList){ %>
+			
+			<c:forEach var="b" items="${list}">
 				<tr>
-					<td><%= b.getNo() %></td>
-					<td><%= b.getCategoryNo() %></td>
-					<td><%= b.getTitle() %></td>
-					<td><%= b.getWriter() %></td>
-					<td><%= b.getCnt() %></td>
-					<td><%= b.getEnrollDate()%></td>
+					<td>${b.no}</td>
+					<td>${b.categoryNo}</td>
+					<td>${b.title}</td>
+					<td>${b.writer}</td>
+					<td>${b.cnt}</td>
+					<td>${b.enrollDate}</td>
 				</tr>
-			<% } %>
+			</c:forEach>
 			
 		</table>
 

@@ -1,6 +1,7 @@
 <%@page import="com.kh.member.vo.MemberVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
 
@@ -18,6 +19,8 @@
 	
 	<!-- Latest compiled JavaScript -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+	<c:set value="<%=contextPath%>" var="cp"></c:set>
 
     <style>
         #login-wrap{

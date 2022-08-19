@@ -51,7 +51,7 @@ public class BoardInsertController extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		//인코딩
-		req.setCharacterEncoding("UTF-8");
+		//req.setCharacterEncoding("UTF-8");
 		
 		//데이터 꺼내기
 		String category = req.getParameter("category");
