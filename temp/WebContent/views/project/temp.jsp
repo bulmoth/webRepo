@@ -74,7 +74,6 @@
 
     <!-- 헤더 차지할 부분 -->
     <div id="header-div">
-        <%@ include file="/WEB-INF/views/common/userHeader.jsp" %>
     </div>
 
     <!-- 페이지 전체 틀 -->
