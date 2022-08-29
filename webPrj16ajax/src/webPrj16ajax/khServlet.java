@@ -34,7 +34,7 @@ public class khServlet extends HttpServlet{
 			vo.setScore(new ScoreVo(100, i*10));
 			
 			list.add(vo);
-		}
+		}		
 		
 		//클라이언트에게 응답
 		resp.setCharacterEncoding("UTF-8");
