@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+<configuration>
+
+	<!-- settings : 마이바티스 구동과 관련된 설정 -->
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+	
+	<!-- typeAlias : 클래스 별칭 -->
+	<typeAliases>
+		<typeAlias type="com.kh.member.vo.MemberVo" alias="mvo"/>
+	</typeAliases>
+	
+	<!-- environments : DB 연결 정보 -->
+	<environments default="e01">
+		<environment id="e01">
+			<!-- transactionManager : JDBC(수동커밋) vs MANAGED(자동커밋) -->
+			<transactionManager type="JDBC"></transactionManager>
+			
+			<!-- driver, url, username, password -->
+			<dataSource type="POOLED"> <!-- 커넥션풀 사용 여부 (POOLED vs UNPOOLED) -->
+				<property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
+				<property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:xe"/>
+				<property name="username" value="C##MYBATIS"/>
+				<property name="password" value="MYBATIS"/>
+			</dataSource>
+		</environment>
+	</environments>
+	
+	<!-- mappers : SQL 구문이 작성된, mapper 파일을 등록 -->
+	<mappers>
+		<mapper resource="/mapper/member-mapper.xml"/>
+	</mappers>
+
+</configuration>
